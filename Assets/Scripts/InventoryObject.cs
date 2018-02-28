@@ -50,7 +50,8 @@ public class InventoryObject : MonoBehaviour, IActivatable
         // Just like how coin worked in our 2D project!
         if (light != null)
             light.enabled = false;
-        meshRenderer.enabled = false;
+        if(meshRenderer != null)
+            meshRenderer.enabled = false;
         if(childRenderers != null)
             foreach (MeshRenderer r in childRenderers)
                 r.enabled = false;
