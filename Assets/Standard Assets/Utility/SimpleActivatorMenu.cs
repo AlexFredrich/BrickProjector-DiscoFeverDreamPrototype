@@ -2,13 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace UnityStandardAssets.Utility
 {
     public class SimpleActivatorMenu : MonoBehaviour
     {
         // An incredibly simple menu which, when given references
         // to gameobjects in the scene
+
         public Text camSwitchButton;
+
         public GameObject[] objects;
 
 
