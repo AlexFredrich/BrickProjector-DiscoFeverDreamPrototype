@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: Worn Dance Shoes
   descriptionText: 5-inch platform shoes with 7-inch heels. Relics from a bygone era.
-  light: {fileID: 0}
+  light: {fileID: 108452353006226324}
 --- !u!114 &114604548253822988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,10 +629,10 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912214986596468}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0.15, y: 0, z: 0}
 --- !u!136 &136361143745663920
 CapsuleCollider:
