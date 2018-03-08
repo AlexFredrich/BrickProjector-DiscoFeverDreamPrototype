@@ -16,8 +16,14 @@ public class InventoryObject : MonoBehaviour, IActivatable
     private AudioSource audioSource;
     private MeshRenderer meshRenderer;
     private MeshRenderer[] childRenderers;
-    private InventoryMenu inventoryMenu;
     private Collider collider;
+    bool isCollected_UseProperty;
+
+    public bool IsCollected
+    {
+        get { return isCollected_UseProperty; }
+        private set { isCollected_UseProperty = value; }
+    }
 
     public string NameText
     {
@@ -31,7 +37,6 @@ public class InventoryObject : MonoBehaviour, IActivatable
 
     private void Start()
     {
-        inventoryMenu = FindObjectOfType<InventoryMenu>();
         meshRenderer = GetComponent<MeshRenderer>();
         collider = GetComponent<Collider>();
         childRenderers = GetComponentsInChildren<MeshRenderer>();
@@ -40,7 +45,6 @@ public class InventoryObject : MonoBehaviour, IActivatable
     }
     public void DoActivate()
     {
-        inventoryMenu.PlayerInventory.Add(this);
         audioSource.Play();
         // Doing this rather than destroy because our Inventory menu still needs
         // to know about this object even though it has been collected and 
@@ -55,6 +59,7 @@ public class InventoryObject : MonoBehaviour, IActivatable
         if(childRenderers != null)
             foreach (MeshRenderer r in childRenderers)
                 r.enabled = false;
-        collider.enabled = false;        
+        collider.enabled = false;
+        IsCollected = true;
     }
 }
