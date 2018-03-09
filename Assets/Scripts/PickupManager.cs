@@ -18,7 +18,7 @@ public class PickupManager : MonoBehaviour
     [Tooltip("List of pickup spawn points")]
     [SerializeField]
     List<Transform> pickupSpawns;
-    [SerializeField] Text pickupText;
+    //[SerializeField] Text pickupText;
 
     // Private fields
     /// <summary>
@@ -29,10 +29,6 @@ public class PickupManager : MonoBehaviour
     /// List of pickups placed in-game
     /// </summary>
     List<GameObject> activePickups = new List<GameObject>();
-    /// <summary>
-    /// List of used spawn points
-    /// </summary>
-    List<int> usedSpawns = new List<int>();
 
 
     // Use this for initialization
@@ -44,8 +40,8 @@ public class PickupManager : MonoBehaviour
 
     private void Update()
     {
-        if(pickupText != null)
-            UpdateText();
+        //if(pickupText != null)
+        //    UpdateText();
     }
 
     /// <summary>
@@ -53,28 +49,14 @@ public class PickupManager : MonoBehaviour
     /// </summary>
     void PlacePickups()
     {
-        //bool usedSpawn = true;
         int spawnPoint = 0;
         foreach(GameObject go in pickupPrefabs)
         {
             spawnPoint = Random.Range(0, pickupSpawns.Count);
-            /*while (usedSpawn)
-            {
-                
-                foreach (int i in usedSpawns)
-                {
-                    if (spawnPoint == i)
-                        usedSpawn = true;
-                    else
-                        usedSpawn = false;
-                }
-            }*/
             GameObject tempPickup = Instantiate(go);
             tempPickup.transform.position = pickupSpawns[spawnPoint].position;
             activePickups.Add(tempPickup);
             pickupSpawns.Remove(pickupSpawns[spawnPoint]);
-            //usedSpawns.Add(spawnPoint);
-            //usedSpawn = true;
         }
     }
     
@@ -82,13 +64,13 @@ public class PickupManager : MonoBehaviour
     /// Update content of the text object.
     /// Function used for testing
     /// </summary>
-    void UpdateText()
+    /*void UpdateText()
     {
         if (collectedPickups < pickupPrefabs.Count)
             pickupText.text = "Pickups Collected: " + collectedPickups;
         else
             pickupText.text = "All pickups collected.";
-    }
+    }*/
 
     /// <summary>
     /// Check each pickup to determine whether or not it has been collected
