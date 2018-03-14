@@ -11,11 +11,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-<<<<<<< HEAD
   - name: 
-=======
-  - name: Walk
->>>>>>> 8d440078191b429d45e56e0fbe52338e14a3bfc2
     cost: 1
   - name: 
     cost: 1
@@ -77,10 +73,10 @@ NavMeshProjectSettings:
   m_Settings:
   - serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1
-    agentHeight: 3
-    agentSlope: 60
-    agentClimb: 2.5
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.75
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
