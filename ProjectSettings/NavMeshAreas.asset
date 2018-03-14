@@ -11,7 +11,11 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
+<<<<<<< HEAD
   - name: 
+=======
+  - name: Walk
+>>>>>>> 8d440078191b429d45e56e0fbe52338e14a3bfc2
     cost: 1
   - name: 
     cost: 1
