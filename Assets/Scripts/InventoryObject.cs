@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InventoryObject : MonoBehaviour, IActivatable
 {
     [SerializeField]
@@ -18,6 +19,7 @@ public class InventoryObject : MonoBehaviour, IActivatable
     private MeshRenderer[] childRenderers;
     private Collider collider;
     bool isCollected_UseProperty;
+    
 
     public bool IsCollected
     {
@@ -61,5 +63,7 @@ public class InventoryObject : MonoBehaviour, IActivatable
                 r.enabled = false;
         collider.enabled = false;
         IsCollected = true;
+
+
     }
 }

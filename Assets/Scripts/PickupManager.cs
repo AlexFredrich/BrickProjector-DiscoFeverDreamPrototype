@@ -24,7 +24,7 @@ public class PickupManager : MonoBehaviour
     /// <summary>
     /// Number of pickups collected
     /// </summary>
-    int collectedPickups;
+    
     /// <summary>
     /// List of pickups placed in-game
     /// </summary>
@@ -33,6 +33,13 @@ public class PickupManager : MonoBehaviour
     /// List of used spawn points
     /// </summary>
     List<int> usedSpawns = new List<int>();
+    int collectedPickups_UseProperty;
+
+    public int CollectedPickups
+    {
+        get { return collectedPickups_UseProperty; }
+        set { collectedPickups_UseProperty = value; }
+    }
 
 
     // Use this for initialization
@@ -44,8 +51,8 @@ public class PickupManager : MonoBehaviour
 
     private void Update()
     {
-        if(pickupText != null)
-            UpdateText();
+        //if(pickupText != null)
+        //    UpdateText();
     }
 
     /// <summary>
@@ -81,27 +88,27 @@ public class PickupManager : MonoBehaviour
     /// <summary>
     /// Update content of the text object.
     /// Function used for testing
-    /// </summary>
-    void UpdateText()
-    {
-        if (collectedPickups < pickupPrefabs.Count)
-            pickupText.text = "Pickups Collected: " + collectedPickups;
-        else
-            pickupText.text = "All pickups collected.";
-    }
-
+   // /// </summary>
+   // void UpdateText()
+   // {
+   //     if (CollectedPickups < pickupPrefabs.Count)
+   //         pickupText.text = "Pickups Collected: " + CollectedPickups;
+   //     else
+   //         pickupText.text = "All pickups collected.";
+   //}
+ 
     /// <summary>
     /// Check each pickup to determine whether or not it has been collected
     /// </summary>
     /// <returns></returns>
     IEnumerator CheckPickups()
     {
-        while(collectedPickups < pickupPrefabs.Count)
+        while(CollectedPickups < pickupPrefabs.Count)
         {
             for(int i = 0; i < activePickups.Count; i++)
                 if(activePickups[i].GetComponent<InventoryObject>().IsCollected)
                 {
-                    collectedPickups++;
+                    CollectedPickups++;
                     activePickups.Remove(activePickups[i]);
                     i--;
                 }
