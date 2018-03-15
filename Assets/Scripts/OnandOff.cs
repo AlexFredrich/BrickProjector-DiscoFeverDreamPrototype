@@ -53,6 +53,7 @@ public class OnandOff : MonoBehaviour
         if(!isOn)
         {
             flashLight.enabled = false;
+            RaycastFromFlashlight.isFlashlightOn = false;
         }
     }
 
@@ -66,6 +67,7 @@ public class OnandOff : MonoBehaviour
                 flashLight.enabled = false;
                 flashClick.PlayDelayed(0);
                 isOn = false;
+                RaycastFromFlashlight.isFlashlightOn = false;
             }
 
             else
@@ -73,6 +75,7 @@ public class OnandOff : MonoBehaviour
                 flashLight.enabled = true;
                 flashClick.PlayDelayed(0);
                 isOn = true;
+                RaycastFromFlashlight.isFlashlightOn = true;
             }
         }
     }

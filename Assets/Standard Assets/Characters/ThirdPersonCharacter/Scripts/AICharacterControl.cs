@@ -11,6 +11,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
 
+        public static bool isHitByFlashlight = false;
 
         private void Start()
         {
@@ -25,13 +26,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (target != null)
-                agent.SetDestination(target.position);
+            if (!isHitByFlashlight)
+            {
+                if (target != null)
+                    agent.SetDestination(target.position);
 
-            if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity, false, false);
+                if (agent.remainingDistance > agent.stoppingDistance)
+                    character.Move(agent.desiredVelocity, false, false);
+                else
+                    character.Move(Vector3.zero, false, false);
+            }
             else
+            {
                 character.Move(Vector3.zero, false, false);
+            }
         }
 
 
