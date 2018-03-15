@@ -12,12 +12,25 @@ public class EscapeTriggerCheck : MonoBehaviour {
     [SerializeField]
     private Text endingMessage;
 
-    [SerializeField]
-    private GameObject pickupManager;
+    int amount;
+
+    GameObject pickupManager;
+    PickupManager pickupManagerScript;
+    private void Start()
+    {
+        pickupManager = GameObject.Find("PickupManager");
+        pickupManagerScript = pickupManager.GetComponent<PickupManager>();
+    }
+
+    private void Update()
+    {
+
+        amount = pickupManagerScript.CollectedPickups;
+    }
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && amount == 5)
         {
             EndingUI.SetActive(true);
             endingMessage.text = "Escape successful! The disco monster will dance alone tonight, awaiting his next victim. Thank goodness it's not you.";

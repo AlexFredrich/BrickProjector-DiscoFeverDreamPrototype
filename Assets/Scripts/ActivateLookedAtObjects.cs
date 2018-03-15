@@ -14,9 +14,6 @@ public class ActivateLookedAtObjects : MonoBehaviour
 
     private IActivatable objectLookedAt;
 
-    private int currentPickUpNumber;
-    private int totalPickUpNumber = 5;
-    private string itemMessage;
 
     void FixedUpdate ()
     {
@@ -34,42 +31,12 @@ public class ActivateLookedAtObjects : MonoBehaviour
             if (Input.GetButtonDown("Activate"))
             {
                 objectLookedAt.DoActivate();
-                currentPickUpNumber++;
-                if(currentPickUpNumber < totalPickUpNumber)
-                {
-                    itemMessage = "You have collect: " + objectLookedAt.NameText + ". You have collected " + currentPickUpNumber + " out of " + totalPickUpNumber + " items.";
-                }
-                else
-                {
-                    itemMessage = "Escape";
-                }
-                lookedAtObjectText.text = itemMessage;
-
-                StartCoroutine(FadeTextToFullAlpha(1f, lookedAtObjectText));
-                StartCoroutine(FadeTextToZeroAlpha(1f, lookedAtObjectText));
+           
             }
         }
     }
 
-    public IEnumerator FadeTextToFullAlpha(float t, Text i)
-    {
-        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
-        while (i.color.a < 1.0f)
-        {
-            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
-            yield return null;
-        }
-    }
 
-    public IEnumerator FadeTextToZeroAlpha(float t, Text i)
-    {
-        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
-        while (i.color.a > 0.0f)
-        {
-            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
-            yield return new WaitForSeconds(1);
-        }
-    }
 
         private void UpdateLookedAtObjectText()
     {

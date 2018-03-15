@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class InventoryObject : MonoBehaviour, IActivatable
 {
@@ -14,12 +14,17 @@ public class InventoryObject : MonoBehaviour, IActivatable
     [SerializeField]
     private Light light;
 
+
+    Text itemText;
+
     private AudioSource audioSource;
     private MeshRenderer meshRenderer;
     private MeshRenderer[] childRenderers;
     private Collider collider;
     bool isCollected_UseProperty;
-    
+    int amount;
+    string itemMessage;
+    PickupManager pickupManagerScript;
 
     public bool IsCollected
     {
@@ -37,13 +42,17 @@ public class InventoryObject : MonoBehaviour, IActivatable
 
     public string DescriptionText { get { return descriptionText; } }
 
-    private void Start()
+    public void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         collider = GetComponent<Collider>();
         childRenderers = GetComponentsInChildren<MeshRenderer>();
         descriptionText = descriptionText.Replace("\\n", "\n");
         audioSource = GetComponent<AudioSource>();
+        GameObject pickUpManager = GameObject.Find("PickupManager");
+        pickupManagerScript = pickUpManager.GetComponent<PickupManager>();
+
+        
     }
     public void DoActivate()
     {
@@ -56,14 +65,16 @@ public class InventoryObject : MonoBehaviour, IActivatable
         // Just like how coin worked in our 2D project!
         if (light != null)
             light.enabled = false;
-        if(meshRenderer != null)
+        if (meshRenderer != null)
             meshRenderer.enabled = false;
-        if(childRenderers != null)
+        if (childRenderers != null)
             foreach (MeshRenderer r in childRenderers)
                 r.enabled = false;
         collider.enabled = false;
         IsCollected = true;
+        pickupManagerScript.UpdateText();
 
 
     }
+ 
 }

@@ -29,11 +29,8 @@ public class PickupManager : MonoBehaviour
     /// List of pickups placed in-game
     /// </summary>
     List<GameObject> activePickups = new List<GameObject>();
-    /// <summary>
-    /// List of used spawn points
-    /// </summary>
-    List<int> usedSpawns = new List<int>();
     int collectedPickups_UseProperty;
+    string itemMessage;
 
     public int CollectedPickups
     {
@@ -47,12 +44,7 @@ public class PickupManager : MonoBehaviour
 	{
         PlacePickups();
         StartCoroutine(CheckPickups());
-	}
 
-    private void Update()
-    {
-        //if(pickupText != null)
-        //    UpdateText();
     }
 
     /// <summary>
@@ -60,43 +52,66 @@ public class PickupManager : MonoBehaviour
     /// </summary>
     void PlacePickups()
     {
-        //bool usedSpawn = true;
         int spawnPoint = 0;
         foreach(GameObject go in pickupPrefabs)
         {
             spawnPoint = Random.Range(0, pickupSpawns.Count);
-            /*while (usedSpawn)
-            {
-                
-                foreach (int i in usedSpawns)
-                {
-                    if (spawnPoint == i)
-                        usedSpawn = true;
-                    else
-                        usedSpawn = false;
-                }
-            }*/
             GameObject tempPickup = Instantiate(go);
             tempPickup.transform.position = pickupSpawns[spawnPoint].position;
             activePickups.Add(tempPickup);
             pickupSpawns.Remove(pickupSpawns[spawnPoint]);
-            //usedSpawns.Add(spawnPoint);
-            //usedSpawn = true;
         }
     }
     
-    /// <summary>
-    /// Update content of the text object.
-    /// Function used for testing
-   // /// </summary>
-   // void UpdateText()
-   // {
-   //     if (CollectedPickups < pickupPrefabs.Count)
-   //         pickupText.text = "Pickups Collected: " + CollectedPickups;
-   //     else
-   //         pickupText.text = "All pickups collected.";
-   //}
- 
+    // <summary>
+    // Update content of the text object.
+    // Function used for testing
+    /// </summary>
+    public void UpdateText()
+    {
+        if (CollectedPickups < 5)
+        {
+            itemMessage = "You have collected " + CollectedPickups + " out of 5 items.";
+        }
+        else
+        {
+            itemMessage = "Escape";
+        }
+      
+
+        StartCoroutine(FadeTextToFullAlpha(1f, pickupText));
+    }
+
+    public IEnumerator FadeTextToFullAlpha(float t, Text i)
+    {
+        i.text = itemMessage;
+        /*Color startColor = new Color(i.color.r, i.color.g, i.color.b, 0);
+        Color fullAlpha = new Color(i.color.r, i.color.g, i.color.b, 1f);
+        while (i.color.a < 1.0f)
+        {
+            i.color = Color.Lerp(startColor, fullAlpha, 2.5f);
+            yield return null;
+        }*/
+        i.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
+
+        StartCoroutine(FadeTextToZeroAlpha(1f, pickupText));
+    }
+
+    public IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    {
+        i.text = itemMessage;
+        /*Color startColor = new Color(i.color.r, i.color.g, i.color.b, 1);
+        Color noAlpha = new Color(i.color.r, i.color.g, i.color.b, 0f);
+        while (i.color.a > 0.0f)
+        {
+            i.color = Color.Lerp(startColor, noAlpha, 2.5f);
+            yield return new WaitForSeconds(1);
+        }*/
+        i.gameObject.SetActive(false);
+        yield return null;
+    }
+
     /// <summary>
     /// Check each pickup to determine whether or not it has been collected
     /// </summary>
